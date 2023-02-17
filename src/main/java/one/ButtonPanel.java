@@ -1,4 +1,4 @@
-package first_package;
+package one;
 
 import javax.swing.*;
 import java.awt.*;
