@@ -1,4 +1,4 @@
-package org.akademija.six.gui.dao;
+package six.gui.dao;
 
 public class Sport {
 
@@ -47,4 +47,5 @@ public class Sport {
                 ", desciption='" + desciption + '\'' +
                 '}';
     }
+
 }

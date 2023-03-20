@@ -1,9 +1,9 @@
-package org.akademija.six.gui.ui;
+package six.gui.ui;
 
-import org.akademija.six.gui.dao.Player;
-import org.akademija.six.gui.dao.PlayerDao;
-import org.akademija.six.gui.dao.Sport;
-import org.akademija.six.gui.dao.SportDao;
+import six.gui.dao.Player;
+import six.gui.dao.PlayerDao;
+import six.gui.dao.Sport;
+import six.gui.dao.SportDao;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
@@ -74,6 +74,7 @@ public class PlayerPanel extends JPanel {
         @Override
         public Object getValueAt(int rowIndex, int columnIndex) {
             Player player = players.get(rowIndex);
+
             PlayerWrapper playerWrapper = new PlayerWrapper(player);
             Object playerFieldOnIndex = playerWrapper.getColumValue(columnIndex);
             return playerFieldOnIndex;

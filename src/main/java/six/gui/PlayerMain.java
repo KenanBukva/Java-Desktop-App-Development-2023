@@ -1,6 +1,6 @@
-package org.akademija.six.gui;
+package six.gui;
 
-import org.akademija.six.gui.ui.PlayerPanel;
+import six.gui.ui.PlayerPanel;
 
 import javax.swing.*;
 

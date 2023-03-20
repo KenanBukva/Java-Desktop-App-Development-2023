@@ -1,6 +1,6 @@
-package org.akademija.six.gui.dao;
+package six.gui.dao;
 
-import org.akademija.six.gui.dao.connection.ConnectionPool;
+import six.gui.dao.connection.ConnectionPool;
 
 import java.sql.*;
 import java.util.ArrayList;

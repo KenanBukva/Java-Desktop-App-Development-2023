@@ -1,4 +1,4 @@
-package org.akademija.six.gui.dao;
+package six.gui.dao;
 
 public class Player {
 

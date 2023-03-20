@@ -1,4 +1,4 @@
-package org.akademija.six.gui.dao.connection;
+package six.gui.dao.connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

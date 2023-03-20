@@ -1,13 +1,12 @@
-package org.akademija.six.gui.dao;
+package six.gui.dao;
 
-import org.akademija.six.gui.dao.connection.ConnectionPool;
+import six.gui.dao.connection.ConnectionPool;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
-public class PlayerDao implements Dao<Player>{
+public class PlayerDao implements Dao<Player> {
     @Override
     public Player save(Player entity) {
         return null;
@@ -16,7 +15,7 @@ public class PlayerDao implements Dao<Player>{
     @Override
     public List<Player> getAll() {
         List<Player> players = new ArrayList<>();
-        String sqlQuery = "SELECT* FROM players p join sport s on p.sport=s.id_sport;";
+        String sqlQuery = "SELECT id,name,surname,sport_name,of_years,vegetarian,favourite_color FROM players p join sport s on p.sport=s.id_sport;";
         //1. konekcija s bazom
         Connection connection = ConnectionPool.getInstance().getConnection();
         //2. PreparedStatement ili Statement
@@ -29,10 +28,10 @@ public class PlayerDao implements Dao<Player>{
                 player.setId(resultSet.getLong(1));
                 player.setName(resultSet.getString("name"));
                 player.setSurname(resultSet.getString("surname"));
-                player.setSport(resultSet.getString("sport_name"));
+                player.setSport(resultSet.getString(4));
                 player.setVegetarian(resultSet.getBoolean("vegetarian"));
                 player.setOfYears(resultSet.getInt("of_years"));
-                player.setFavouriteColor(resultSet.getString(7));
+                player.setFavouriteColor(resultSet.getString("favourite_color"));
                 players.add(player);
             }
         }catch (SQLException e){
@@ -44,7 +43,7 @@ public class PlayerDao implements Dao<Player>{
 
     public List<String> getColumnNames(){
         List<String> columnNames = new ArrayList<>();
-        String sqlQuery = "SELECT * FROM players";
+        String sqlQuery = "SELECT id,name,surname,sport_name,of_years,vegetarian,favourite_color FROM players p join sport s on p.sport=s.id_sport;";
         //1. konekcija s bazom
         Connection connection = ConnectionPool.getInstance().getConnection();
         //2. PreparedStatement ili Statement
@@ -72,12 +71,34 @@ public class PlayerDao implements Dao<Player>{
     }
 
     @Override
-    public Player update(Player entity) {
-        System.out.println("Ovdje kući implementirajte update statement");
-        System.out.println("Promjen se desila nad");
-        System.out.println(entity);
-        return null;
+    public Player update(Player player) {
+
+      String sqlUpdate = """
+                 UPDATE players SET name = ?, 
+                 surname = ?, 
+               
+               of_years = ?, 
+                 vegetarian = ?, 
+                 favourite_color = ? WHERE id = ?
+                 """;
+        Connection connection = ConnectionPool.getInstance().getConnection();
+        try(PreparedStatement preparedStatement = connection.prepareStatement(sqlUpdate)){
+            preparedStatement.setString(1, player.getName());
+            preparedStatement.setString(2, player.getSurname());
+
+            preparedStatement.setInt(3, player.getOfYears());
+            preparedStatement.setBoolean(4, player.getVegetarian());
+            preparedStatement.setString(5, player.getFavouriteColor());
+            preparedStatement.setLong(6, player.getId());
+            preparedStatement.executeUpdate();
+        }catch (SQLException exception){
+            System.err.println(exception.getMessage());
+        }finally {
+            ConnectionPool.getInstance().releaseConnection(connection);
+        }
+        return player;
     }
+
 
     @Override
     public boolean delete(Player entity) {

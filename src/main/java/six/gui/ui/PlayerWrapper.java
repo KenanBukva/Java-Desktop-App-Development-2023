@@ -1,6 +1,6 @@
-package org.akademija.six.gui.ui;
+package six.gui.ui;
 
-import org.akademija.six.gui.dao.Player;
+import six.gui.dao.Player;
 
 public class PlayerWrapper {
     private final Player player;
@@ -8,6 +8,7 @@ public class PlayerWrapper {
 
     public PlayerWrapper(Player player){
         this.player = player;
+
     }
 
     public Object getColumValue(int index){
@@ -15,7 +16,7 @@ public class PlayerWrapper {
             case 0: return player.getId();
             case 1: return player.getName();
             case 2: return player.getSurname();
-            case 3: return  player.getSport();
+            case 3: return player.getSport();
             case 4: return player.getOfYears();
             case 5: return player.getVegetarian();
             case 6: return player.getFavouriteColor();
@@ -34,4 +35,5 @@ public class PlayerWrapper {
             case 6: player.setFavouriteColor((String)aValue);break;
         }
     }
+
 }

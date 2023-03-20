@@ -1,4 +1,4 @@
-package org.akademija.six.gui.dao.connection;
+package six.gui.dao.connection;
 
 public enum ConnectionParam {
     URL("jdbc:mysql://localhost:3306/sports"),
